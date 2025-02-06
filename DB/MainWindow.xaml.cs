@@ -21,6 +21,7 @@ namespace DB
         {
             InitializeComponent();
             //Content = new VipclubsContext();
+            // Я ОЧЕНЬ ХОЧУ ОТПРАВИТЬ ПЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖ
         }
     }
 }
