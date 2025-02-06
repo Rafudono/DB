@@ -26,4 +26,6 @@ public partial class User
     public virtual ICollection<Club> Clubs { get; set; } = new List<Club>();
 
     public virtual Role IdRoleNavigation { get; set; } = null!;
+
+    public virtual ICollection<Club> ClubsNavigation { get; set; } = new List<Club>();
 }

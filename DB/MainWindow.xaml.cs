@@ -16,9 +16,11 @@ namespace DB
     /// </summary>
     public partial class MainWindow : Window
     {
+        VipclubsContext Context;
         public MainWindow()
         {
             InitializeComponent();
+            Content = new VipclubsContext();
         }
     }
 }
