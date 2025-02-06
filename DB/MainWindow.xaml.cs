@@ -20,7 +20,7 @@ namespace DB
         public MainWindow()
         {
             InitializeComponent();
-            Content = new VipclubsContext();
+            //Content = new VipclubsContext();
         }
     }
 }
