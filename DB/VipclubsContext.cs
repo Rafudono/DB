@@ -86,6 +86,9 @@ public partial class VipclubsContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("description");
             entity.Property(e => e.IdBoss).HasColumnName("idBoss");
+            entity.Property(e => e.Image)
+                .HasColumnType("blob")
+                .HasColumnName("image");
             entity.Property(e => e.Title)
                 .HasMaxLength(100)
                 .HasColumnName("title");

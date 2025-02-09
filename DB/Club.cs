@@ -13,6 +13,8 @@ public partial class Club
 
     public int IdBoss { get; set; }
 
+    public byte[]? Image { get; set; }
+
     public virtual User IdBossNavigation { get; set; } = null!;
 
     public virtual ICollection<User> Users { get; set; } = new List<User>();
