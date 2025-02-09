@@ -47,7 +47,7 @@ namespace DB
            
           
             DataContext = this;
-            //Content = new VipclubsContext();
+            //Context = new VipclubsContext();
             // Я ОЧЕНЬ ХОЧУ ОТПРАВИТЬ ПЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖ
         }
     }

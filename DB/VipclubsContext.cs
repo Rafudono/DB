@@ -24,11 +24,13 @@ public partial class VipclubsContext : DbContext
 
     public virtual DbSet<StatusApplication> StatusApplications { get; set; }
 
+    public virtual DbSet<TypeOfClub> TypeOfClubs { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;userid=root;password=crash;database=VIPClubs;characterset=utf8mb4", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.37-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;userid=root;database=VIPClubs;characterset=utf8mb4", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.30-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -81,11 +83,14 @@ public partial class VipclubsContext : DbContext
 
             entity.HasIndex(e => e.IdBoss, "Club_User_FK");
 
+            entity.HasIndex(e => e.IdType, "club_type_of_club_FK");
+
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Description)
                 .HasMaxLength(100)
                 .HasColumnName("description");
             entity.Property(e => e.IdBoss).HasColumnName("idBoss");
+            entity.Property(e => e.IdType).HasColumnName("id_type");
             entity.Property(e => e.Image)
                 .HasColumnType("blob")
                 .HasColumnName("image");
@@ -97,6 +102,11 @@ public partial class VipclubsContext : DbContext
                 .HasForeignKey(d => d.IdBoss)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Club_User_FK");
+
+            entity.HasOne(d => d.IdTypeNavigation).WithMany(p => p.Clubs)
+                .HasForeignKey(d => d.IdType)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("club_type_of_club_FK");
 
             entity.HasMany(d => d.Users).WithMany(p => p.ClubsNavigation)
                 .UsingEntity<Dictionary<string, object>>(
@@ -139,6 +149,18 @@ public partial class VipclubsContext : DbContext
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.ToTable("status_application");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Title)
+                .HasMaxLength(100)
+                .HasColumnName("title");
+        });
+
+        modelBuilder.Entity<TypeOfClub>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("type_of_club");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Title)
